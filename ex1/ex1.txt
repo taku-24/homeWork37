@@ -1,0 +1,26 @@
+CREATE TABLE writers (
+	id INT NOT NULL PRIMARY KEY,
+    name VARCHAR(80) NOT NULL);
+    
+CREATE TABLE works (
+	id INT NOT NULL PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    type VARCHAR(50) NOT NULL);
+    
+CREATE TABLE categories (
+	id INT NOT NULL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    parent_id INT NULL,
+    FOREIGN KEY (parent_id) REFERENCES Categories(id));    
+
+CREATE TABLE writer_works (
+	writer_id INT NOT NULL,
+    work_id INT NOT NULL,
+    FOREIGN KEY (writer_id) REFERENCES writers(id),
+    FOREIGN KEY (work_id) REFERENCES works(id));
+    
+CREATE TABLE work_category (
+	work_id INT NOT NULL,
+    category_id INT NOT NULL,
+    FOREIGN KEY (work_id) REFERENCES works(id),
+    FOREIGN KEY (category_id) REFERENCES categories(id));
